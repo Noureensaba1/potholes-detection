@@ -1,0 +1,63 @@
+# STEP 1: Install YOLOv8 (Ultralytics)
+!pip install ultralytics --upgrade -q
+
+# STEP 2: Clone your dataset from GitHub (replace with your URL)
+!git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+%cd YOUR_REPO_NAME
+
+# STEP 3: Check folder structure (should be dataset/images/train etc.)
+!ls
+
+# STEP 4: Create data.yaml file
+yaml_content = """
+path: /content/YOUR_REPO_NAME
+train: images/train
+val: images/val
+
+nc: 1
+names: ['pothole']
+"""
+
+with open("data.yaml", "w") as f:
+    f.write(yaml_content)
+
+# STEP 5: Train the YOLOv8 model
+from ultralytics import YOLO
+
+model = YOLO("yolov8n.pt")  # You can change to yolov8s.pt, yolov8m.pt, etc.
+model.train(data="data.yaml", epochs=50, imgsz=640)
+
+# STEP 6: Evaluate
+model.val()
+
+# STEP 7: Inference (optional)
+results = model.predict(source="images/val", save=True, conf=0.25)
+import os, shutil, random
+
+img_dir = 'images'
+label_dir = 'labels'
+
+train_img_dir = 'images/train'
+val_img_dir = 'images/val'
+train_lbl_dir = 'labels/train'
+val_lbl_dir = 'labels/val'
+
+os.makedirs(train_img_dir, exist_ok=True)
+os.makedirs(val_img_dir, exist_ok=True)
+os.makedirs(train_lbl_dir, exist_ok=True)
+os.makedirs(val_lbl_dir, exist_ok=True)
+
+files = os.listdir(img_dir)
+random.shuffle(files)
+split = int(0.8 * len(files))
+
+for i, file in enumerate(files):
+    if not file.endswith('.jpg'):
+        continue
+    label_file = file.replace('.jpg', '.txt')
+    if i < split:
+        shutil.move(f'{img_dir}/{file}', f'{train_img_dir}/{file}')
+        shutil.move(f'{label_dir}/{label_file}', f'{train_lbl_dir}/{label_file}')
+    else:
+        shutil.move(f'{img_dir}/{file}', f'{val_img_dir}/{file}')
+        shutil.move(f'{label_dir}/{label_file}', f'{val_lbl_dir}/{label_file}')
