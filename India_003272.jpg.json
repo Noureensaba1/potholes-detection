@@ -1,0 +1,55 @@
+{
+    "description": "",
+    "tags": [
+        {
+            "id": 16587397,
+            "tagId": 29662,
+            "name": "India",
+            "value": null,
+            "labelerLogin": "inbox@datasetninja.com",
+            "createdAt": "2024-01-22T16:25:52.783Z",
+            "updatedAt": "2024-01-22T16:25:52.783Z"
+        }
+    ],
+    "size": {
+        "height": 720,
+        "width": 720
+    },
+    "objects": [
+        {
+            "id": 139002448,
+            "classId": 6512002,
+            "objectId": null,
+            "description": "",
+            "geometryType": "rectangle",
+            "labelerLogin": "inbox@datasetninja.com",
+            "createdAt": "2024-01-22T16:25:52.784Z",
+            "updatedAt": "2024-01-22T16:25:52.784Z",
+            "tags": [
+                {
+                    "id": 104989373,
+                    "tagId": 29666,
+                    "name": "detail",
+                    "value": "rutting, bump, pothole, separation",
+                    "labelerLogin": "inbox@datasetninja.com",
+                    "createdAt": "2024-01-22T16:25:52.784Z",
+                    "updatedAt": "2024-01-22T16:25:52.784Z"
+                }
+            ],
+            "classTitle": "pothole",
+            "points": {
+                "exterior": [
+                    [
+                        280,
+                        509
+                    ],
+                    [
+                        452,
+                        647
+                    ]
+                ],
+                "interior": []
+            }
+        }
+    ]
+}
